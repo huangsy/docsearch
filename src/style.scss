@@ -1,8 +1,42 @@
-.zent-auto-complete {
+.zent-popover {
   width: 50%;
 }
 
 .zent-popup-menu .zent-popup-menu-item.current, .zent-popup-menu .zent-popup-menu-item.hover, .zent-popup-menu .zent-popup-menu-item:hover {
   color: initial;
   background-color: #f5f7fa;
+}
+
+:local(.docsearch) {
+  margin: 100px auto 0;
+  display: block;
+  width: 50%;
+
+  .zent-popover-wrapper {
+    width: 100%;
+  }
+}
+
+:local(.auto-item) {
+  position: relative;
+  padding-left: 50px;
+
+  .title {
+    font-weight: bold;
+  }
+
+  .group {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+  }
+  
+  .gray {
+    color: gray;
+  }
+  
+  .highlight {
+    color: #f40;
+  }
 }

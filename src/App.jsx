@@ -5,7 +5,7 @@ import each from 'lodash/each';
 import trim from 'lodash/trim';
 import map from 'lodash/map';
 import isArray from 'lodash/isArray';
-import './style.scss';
+import style from './style.scss';
 
 const titlePattern = /[h1|h2|h3|h4|h5|h6]/;
 
@@ -25,7 +25,7 @@ class App extends Component {
     const index = source.indexOf(target);
     const len = target.length;
     if (index < 0) return source;
-    return <span>{source.slice(0, index)}<span style={{ backgroundColor: 'yellow' }}>{target}</span>{source.slice(index + len)}</span>;
+    return <span>{source.slice(0, index)}<span className="highlight">{target}</span>{source.slice(index + len)}</span>;
   }
 
   handleSearch = (value) => {
@@ -107,20 +107,23 @@ class App extends Component {
     const data = map(result, (item, index) => ({
       value: `${index}-${item.path}`,
       content: (
-        <div>
-          <p>{item.group} - {item.title}</p>
+        <div className={style['auto-item']}>
+          <div className="group gray">{item.group}</div>
+          <p className="title">{item.title}</p>
           <p>{item.desc}</p>
         </div>
       )
     }));
     return (
-      <AutoComplete
-        data={data}
-        value={value}
-        onSelect={this.handleSelect}
-        onSearch={this.handleSearch}
-        filterOption={() => true}
-      />
+      <div className={style.docsearch}>
+        <AutoComplete
+          data={data}
+          value={value}
+          onSelect={this.handleSelect}
+          onSearch={this.handleSearch}
+          filterOption={() => true}
+        />
+      </div>
     );
   }
 }
