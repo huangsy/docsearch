@@ -1,3 +1,8 @@
 .zent-auto-complete {
   width: 50%;
 }
+
+.zent-popup-menu .zent-popup-menu-item.current, .zent-popup-menu .zent-popup-menu-item.hover, .zent-popup-menu .zent-popup-menu-item:hover {
+  color: initial;
+  background-color: #f5f7fa;
+}

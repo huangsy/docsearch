@@ -21,18 +21,26 @@ class App extends Component {
     });
   }
 
+  highlight(source, target) {
+    const index = source.indexOf(target);
+    const len = target.length;
+    if (index < 0) return source;
+    return <span>{source.slice(0, index)}<span style={{ backgroundColor: 'yellow' }}>{target}</span>{source.slice(index + len)}</span>;
+  }
+
   handleSearch = (value) => {
     let result = [];
     each(this.datasets, data => {
-      const { title, desc, path, group } = data;
+      let { title, desc, path, group } = data;
       const titleIndex = title ? title.indexOf(value) : -1;
       const descIndex = desc ? desc.indexOf(value) : -1;
       if (value && (titleIndex > -1 || descIndex > -1)) {
+        desc = desc ? desc.slice(descIndex, descIndex + 50) : '';
         result.push({
-          title,
+          title: this.highlight(title, value),
           path,
           group,
-          desc: desc && desc.slice(descIndex, descIndex + 50)
+          desc: this.highlight(desc, value)
         });
       }
     });
@@ -100,12 +108,11 @@ class App extends Component {
       value: `${index}-${item.path}`,
       content: (
         <div>
-          <p>{`${item.group} - ${item.title}`}</p>
+          <p>{item.group} - {item.title}</p>
           <p>{item.desc}</p>
         </div>
       )
     }));
-    console.log(data);
     return (
       <AutoComplete
         data={data}
